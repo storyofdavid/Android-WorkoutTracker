@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/grp_1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_workouts"
+            android:icon="@drawable/ic_home"
+            android:title="Workouts" />
+        <item
+            android:id="@+id/nav_archived"
+            android:icon="@drawable/ic_whatshot"
+            android:title="Archived" />
+        <item
+            android:id="@+id/nav_progress"
+            android:icon="@drawable/ic_whatshot"
+            android:title="Progress" />
+        <item
+            android:id="@+id/nav_calendar"
+            android:icon="@drawable/ic_schedule"
+            android:title="Calendar" />
+    </group>
+    <group
+        android:id="@+id/grp_2"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_color_scheme"
+            android:icon="@drawable/ic_color_scheme"
+            android:title="Color Scheme" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="Settings" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_help"
+            android:title="About" />
+    </group>
+
+</menu>

@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+
+// Create a variable called keystorePropertiesFile, and initialize it to your
+// keystore.properties file, in the rootProject folder.
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+
+// Initialize a new Properties() object called keystoreProperties.
+def keystoreProperties = new Properties()
+
+// Load your keystore.properties file into the keystoreProperties object.
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+android {
+    compileSdkVersion 33
+    buildToolsVersion '33.0.1'
+    defaultConfig {
+        applicationId "com.workouttracker.gamestudi.workouttracker"
+        minSdkVersion 26
+        targetSdkVersion 33
+        versionCode 50
+        versionName "8.4"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            buildConfigField "Boolean", "display_logs_button", 'false'
+            buildConfigField "Boolean", "is_debug_build", 'false'
+        }
+
+        debug {
+            applicationIdSuffix ".debug"
+            buildConfigField "Boolean", "display_logs_button", 'true'
+            buildConfigField "Boolean", "is_debug_build", 'true'
+            debuggable true
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-alpha4', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0-alpha01'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'com.balysv:material-ripple:1.0.2'
+    implementation 'com.airbnb.android:lottie:5.0.3'
+    implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+
+    testImplementation 'junit:junit:4.12'
+}
